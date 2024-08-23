@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { registerNewUser, loginUser } from "../services/auth.services";
+import { registerNewUser, loginUser, registerWithGoogle, loginUserWithGoogle } from "../services/auth.services";
 
 const registerCtrl = async ({ body }: Request, res: Response) => {
   const responseUser = await registerNewUser(body);
@@ -8,14 +8,20 @@ const registerCtrl = async ({ body }: Request, res: Response) => {
 
 const loginCtrl = async ({ body }: Request, res: Response) => {
   const { email, password } = body;
+  
   const responseUser = await loginUser({ email, password });
-
-  if (responseUser === "PASSWORD_INCORRECT") {
-    res.status(403);
-    res.send(responseUser);
-  } else {
-    res.send(responseUser);
-  }
+  res.send(responseUser);
 };
 
-export { loginCtrl, registerCtrl };
+const loginCtrlWithGoogle = async ({ body }: Request, res: Response) => {
+  const { email } = body;
+  const responseUser = await loginUserWithGoogle({ email });
+  res.send(responseUser);
+};
+
+const registerCtrlWithGoogle = async ({ body }: Request, res: Response) => {
+  const responseUser = await registerWithGoogle(body);
+  res.send(responseUser);
+};
+
+export { loginCtrl, registerCtrl, registerCtrlWithGoogle, loginCtrlWithGoogle };

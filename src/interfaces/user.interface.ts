@@ -1,6 +1,9 @@
 import { Auth } from "./auth.interface";
 
 export interface User extends Auth {
-  name: string;
-  description: string;
+  displayName: string;
+  isGoogle?: boolean;
+  photoURL?: string;
+  isAdmin?: boolean;
+  userId?: string
 }

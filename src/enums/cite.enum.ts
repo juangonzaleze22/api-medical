@@ -1,0 +1,6 @@
+export enum STATUS_CITE  {
+    PENDING = 'PENDING',
+    APPROVED = 'APPROVED',
+    CANCELLED = 'CANCELLED',
+    FINISHED = 'FINISHED'
+}   
